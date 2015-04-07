@@ -20,27 +20,26 @@ public class TransitionFragment extends Fragment {
 
     public TransitionFragment() {
     }
-
+git stat
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_transition_scene_1, container, false);
-
         View rootView2 = inflater.inflate(R.layout.fragment_transition_scene_2, container, false);
+        final Scene scene2 = new Scene(container, (ViewGroup) rootView2);
+        final Scene scene1 = new Scene(container, (ViewGroup) rootView);
 
-
-        //ViewGroup container = (ViewGroup)findViewById(R.id.container);
         TransitionInflater transitionInflater = TransitionInflater.from(getActivity());
         mTransitionManager = transitionInflater.inflateTransitionManager(R.transition.transition_manager, container);
-        mScene1 = Scene.getSceneForLayout(container, R.layout.fragment_transition_scene_1, getActivity());
-        mScene2 = Scene.getSceneForLayout(container, R.layout.fragment_transition_scene_2, getActivity());
+//mScene1 = Scene.getSceneForLayout(container, R.layout.fragment_transition_scene_1, getActivity());
+//mScene2 = Scene.getSceneForLayout(container, R.layout.fragment_transition_scene_2, getActivity());
         final Scene scene = new Scene(container, (ViewGroup) rootView2);
 
         Button bt = (Button) rootView.findViewById(R.id.goButton);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToScene2(view);
+                mTransitionManager.transitionTo(scene2);
             }
         });
 
@@ -48,10 +47,9 @@ public class TransitionFragment extends Fragment {
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToScene1(view);
+                mTransitionManager.transitionTo(scene1);
             }
         });
-
 
     return rootView;
     }
